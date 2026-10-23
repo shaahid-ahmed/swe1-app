@@ -1,0 +1,6 @@
+[run]
+source = mysite,polls
+omit =
+    */migrations/*
+    mysite/asgi.py
+    mysite/wsgi.py

@@ -4,3 +4,9 @@ __pycache__/
 db.sqlite3
 staticfiles/
 .env
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+.coverage
