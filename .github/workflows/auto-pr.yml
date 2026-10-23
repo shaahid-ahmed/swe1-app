@@ -1,0 +1,26 @@
+name: Auto PR
+
+on:
+  push:
+    branches-ignore: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  GH_TOKEN: ${{ github.token }}
+  GH_REPO: ${{ github.repository }}
+
+jobs:
+  open-and-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open pull request
+        run: |
+          gh pr create --base main --head "$GITHUB_REF_NAME" \
+            --title "Merge $GITHUB_REF_NAME" --body "Automated pull request." \
+            || echo "PR already exists"
+
+      - name: Enable auto-merge
+        run: gh pr merge "$GITHUB_REF_NAME" --auto --merge --delete-branch
