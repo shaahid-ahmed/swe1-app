@@ -1,7 +1,7 @@
 # swe1-app
 
 [![Build Status](https://app.travis-ci.com/shaahid-ahmed/swe1-app.svg?branch=main)](https://app.travis-ci.com/github/shaahid-ahmed/swe1-app)
-[![Coverage Status](https://coveralls.io/repos/github/shaahid-ahmed/swe1-app/badge.svg?branch=main)](https://coveralls.io/github/shaahid-ahmed/swe1-app?branch=main)
+[![Coverage Status](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fcoveralls.io%2Fgithub%2Fshaahid-ahmed%2Fswe1-app.json&query=%24.covered_percent&label=coverage&suffix=%25)](https://coveralls.io/github/shaahid-ahmed/swe1-app)
 
 **Course:** Software Engineering (Fall 2026)
 

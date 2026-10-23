@@ -1,0 +1,28 @@
+name: Cleanup branches
+
+on:
+  pull_request:
+    types: [closed]
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+env:
+  GH_TOKEN: ${{ github.token }}
+  GH_REPO: ${{ github.repository }}
+
+jobs:
+  delete-merged-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete branches already merged into main
+        run: |
+          for branch in $(gh api "repos/$GH_REPO/branches" --paginate --jq '.[].name'); do
+            [ "$branch" = "main" ] && continue
+            ahead=$(gh api "repos/$GH_REPO/compare/main...$branch" --jq '.ahead_by')
+            if [ "$ahead" = "0" ]; then
+              gh api -X DELETE "repos/$GH_REPO/git/refs/heads/$branch" && echo "deleted $branch"
+            fi
+          done

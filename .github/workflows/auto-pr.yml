@@ -24,3 +24,8 @@ jobs:
 
       - name: Enable auto-merge
         run: gh pr merge "$GITHUB_REF_NAME" --auto --merge --delete-branch
+
+      - name: Comment branch coverage badge
+        run: |
+          BADGE="https://coveralls.io/repos/github/$GH_REPO/badge.svg?branch=$GITHUB_REF_NAME"
+          gh pr comment "$GITHUB_REF_NAME" --body "Coverage for \`$GITHUB_REF_NAME\`: [![Coverage]($BADGE)](https://coveralls.io/github/$GH_REPO?branch=$GITHUB_REF_NAME)"
