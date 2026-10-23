@@ -1,5 +1,7 @@
 import datetime
+from io import StringIO
 
+from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
@@ -60,3 +62,12 @@ class PollViewTests(TestCase):
         q = make_question("Q")
         response = self.client.post(reverse("polls:vote", args=(q.id,)))
         self.assertContains(response, "You didn&#x27;t select a choice.")
+
+
+class SeedPollsTests(TestCase):
+    def test_seed_creates_polls_once(self):
+        call_command("seed_polls", stdout=StringIO())
+        count = Question.objects.count()
+        self.assertGreater(count, 0)
+        call_command("seed_polls", stdout=StringIO())
+        self.assertEqual(Question.objects.count(), count)
